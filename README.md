@@ -1,2 +1,2 @@
 # Django_blog
- Creating a blogging platform using HTML, CSS, JavaScript, Django.
+ Creating a web based blogging platform using HTML, CSS, JavaScript, Django.
