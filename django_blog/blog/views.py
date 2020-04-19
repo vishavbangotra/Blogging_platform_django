@@ -3,7 +3,8 @@ from django.urls                    import reverse_lazy
 from django.utils                   import timezone
 from django.contrib.auth.mixins     import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from blog.models                    import Comments, Post
+from blog.forms                     import PostForm, CommentForm
+from blog.models                    import Comment, Post
 from django.views.generic           import (ListView, DetailView,
                                             DetailView, CreateView,
                                             UpdateView, TemplateView
@@ -17,7 +18,7 @@ class AboutView(TemplateView):
 class PostListView(ListView):
     model = Post
     def get_queryset(self):
-        return Post.object.filter(published_date__lte=timezone.now()).order_by('-published_date')
+        return Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
 
 
 class PostDetailView(DetailView):
@@ -26,14 +27,14 @@ class PostDetailView(DetailView):
 
 class CreatePostView(LoginRequiredMixin,CreateView):
     login_url = '/login/'
-    redirect_field_name = 'blog/post_details.html'
+    redirect_field_name = 'blog/post_detail.html'
     form_class = PostForm
     model = Post
 
 
 class PostUpdateView(LoginRequiredMixin,UpdateView):
     login_url = '/login/'
-    redirect_field_name = 'blog/post_details.html'
+    redirect_field_name = 'blog/post_detail.html'
     form_class = PostForm
     model = Post
 
@@ -50,11 +51,10 @@ class DraftListView(LoginRequiredMixin, ListView):
 
 
     def get_queryset(self):
-        return Post.objects.Filter(published_date__isnull=True).order_by('created_date')
+        return Post.objects.filter(published_date__isnull=True).order_by('created_date')
 
 
         ####################################################
-
         ####################################################
 
 
@@ -76,17 +76,17 @@ def add_comment_to_post(request,pk):
             comment.save()
             return redirect('post_detail',pk=post.pk)
     form = CommentForm()
-    return = render(request, 'blog/comment_form.html', {'form':form})
+    return render(request, 'blog/comment_form.html', {'form':form})
 
 @login_required
 def comment_approve(request,pk):
-    comment=get_object_or_404(comment,pk=pk):
+    comment=get_object_or_404(comment,pk=pk)
     comment.approve()
     return redirect('post_detail',pk=comment.post.pk)
 
 @login_required
 def comment_remove(request,pk):
-    comment = get_object_or_404(Comment,pk=pk):
+    comment = get_object_or_404(Comment,pk=pk)
     post_pk = comment.post.pk
     comment.delete()
     return redirect('post_detail',pk=post_pk)

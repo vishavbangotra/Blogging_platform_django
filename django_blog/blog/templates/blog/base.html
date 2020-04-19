@@ -2,12 +2,7 @@
 {% load static %}
 <html lang="en" dir="ltr">
   <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Medium -->
     <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
@@ -37,7 +32,7 @@
               <a href="{% url 'post_new' %}">Create Post</a>
             </li>
             <li>
-              <a href="{% url 'post_draft_list' %}">Draft list</a>
+              <a href="{% url 'draft' %}">Draft list</a>
             </li>
             <li>
               <a href="{% url 'logout' %}">Logout</a>
@@ -47,7 +42,7 @@
             </li>
             {% else %}
             <li>
-              <a class='nav navbar-right' href="{% url 'login' %}"><span class='glyphicon glyphicon-user'></span> </a>
+              <a class='nav navbar-right' href="{% url 'login' %}"><span class='glyphicon glyphicon-user'>user</span> </a>
             </li>
           {% endif %}
         </ul>

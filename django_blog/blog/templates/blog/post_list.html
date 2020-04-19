@@ -1,4 +1,4 @@
-{% extends 'blog/base.html' %}
+{% extends 'base.html' %}
 {% block content %}
 
 <div class="centerstage">
@@ -8,14 +8,8 @@
       <div class="date">
         <p>Published on: {{post.published|date:"D M Y"}}</p>
       </div>
-      <a href="{% url post_detail' pk=post.pk %}">Comments: {{post.approve_comments.count}}</a>
-
+      <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{post.approve_comments.count}}</a>
       </div>
-
-    </div>
   {% endfor %}
-
 </div>
-
-
 {% endblock %}
